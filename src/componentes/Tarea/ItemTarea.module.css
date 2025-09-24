@@ -1,0 +1,2 @@
+.item { display:flex; justify-content:space-between; padding:8px; border-bottom:1px solid rgba(0,0,0,0.08); }
+.title { margin-left:8px; font-weight:600; }
