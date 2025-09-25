@@ -10,7 +10,7 @@ export default function useTags() {
     try {
       setCargando(true);
       const data = await listarTags();
-      setTags(data);
+      setTags(Array.isArray(data) ? data : data?.tags || []);
     } catch (err) {
       setError(err);
     } finally {

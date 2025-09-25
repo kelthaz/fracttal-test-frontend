@@ -10,7 +10,7 @@ export default function useCategorias() {
     try {
       setCargando(true);
       const data = await listarCategorias();
-      setCategorias(data);
+      setCategorias(Array.isArray(data) ? data : data.categorias || []);
     } catch (err) {
       setError(err);
     } finally {
@@ -26,7 +26,7 @@ export default function useCategorias() {
   const agregarCategoria = async (categoria) => {
     try {
       const nuevaCategoria = await agregarCategoriaService(categoria);
-      setCategorias(prev => [...prev, nuevaCategoria]);
+      setCategorias((prev) => [...(Array.isArray(prev) ? prev : []), nuevaCategoria]);
       return nuevaCategoria;
     } catch (err) {
       console.error(err);

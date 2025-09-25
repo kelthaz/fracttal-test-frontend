@@ -21,7 +21,9 @@ export default function ListaCategorias() {
     if (cargandoCategorias) return <Typography>Cargando categorías...</Typography>;
     if (!categorias || categorias.length === 0) return <Typography>No hay categorías aún</Typography>;
 
-    const categoriasMostradas = categorias.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    const categoriasArray = Array.isArray(categorias) ? categorias : [];
+    const categoriasMostradas = categoriasArray.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+
 
     return (
         <Box>

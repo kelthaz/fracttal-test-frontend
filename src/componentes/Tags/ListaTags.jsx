@@ -20,7 +20,7 @@ export default function ListaTags() {
     };
 
     if (cargando) return <Typography>Cargando tags...</Typography>;
-    if (!tags || tags.length === 0) return <Typography>No hay tags aún</Typography>;
+    if (!tags || tags.length === 0) return <Typography>No hay etiquetas aún</Typography>;
 
     const tagsMostrados = tags.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
