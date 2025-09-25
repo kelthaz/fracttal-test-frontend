@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import {
     Table, TableBody, TableCell, TableContainer,
-    TableHead, TableRow, Paper, Typography, Box, TablePagination, Snackbar, Alert
+    TableHead, TableRow, Paper, Typography, Box,
+    TablePagination, Snackbar, Alert
 } from "@mui/material";
-import useCategorias from "../../hooks/categorias/useCategorias";
+import useTags from "../../hooks/tags/useTags";
 
-export default function ListaCategorias() {
-    const { categorias, cargando: cargandoCategorias } = useCategorias();
+export default function ListaTags() {
+    const { tags, cargando } = useTags();
     const [alerta, setAlerta] = useState({ abierto: false, mensaje: "", severidad: "success" });
 
     const [page, setPage] = useState(0);
@@ -18,10 +19,10 @@ export default function ListaCategorias() {
         setPage(0);
     };
 
-    if (cargandoCategorias) return <Typography>Cargando categorías...</Typography>;
-    if (!categorias || categorias.length === 0) return <Typography>No hay categorías aún</Typography>;
+    if (cargando) return <Typography>Cargando tags...</Typography>;
+    if (!tags || tags.length === 0) return <Typography>No hay tags aún</Typography>;
 
-    const categoriasMostradas = categorias.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    const tagsMostrados = tags.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
     return (
         <Box>
@@ -49,10 +50,10 @@ export default function ListaCategorias() {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {categoriasMostradas.map((categoria) => (
-                            <TableRow key={categoria.id}>
-                                <TableCell>{categoria.id}</TableCell>
-                                <TableCell>{categoria.name}</TableCell>
+                        {tagsMostrados.map((tag) => (
+                            <TableRow key={tag.id}>
+                                <TableCell>{tag.id}</TableCell>
+                                <TableCell>{tag.name}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -60,7 +61,7 @@ export default function ListaCategorias() {
 
                 <TablePagination
                     component="div"
-                    count={categorias.length}
+                    count={tags.length}
                     page={page}
                     onPageChange={handleChangePage}
                     rowsPerPage={rowsPerPage}

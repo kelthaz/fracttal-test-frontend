@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { listarTags } from "../../servicios/tags/tagsService";
+import { listarTags, agregarTagService } from "../../servicios/tags/tagsService";
 
 export default function useTags() {
   const [tags, setTags] = useState([]);
@@ -22,5 +22,16 @@ export default function useTags() {
     fetchTags();
   }, []);
 
-  return { tags, cargando, error, fetchTags };
+  const agregarTag = async (tag) => {
+    try {
+      const nuevoTag = await agregarTagService(tag);
+      setTags((prev) => [...prev, nuevoTag]);
+      return nuevoTag;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  };
+
+  return { tags, cargando, error, agregarTag, fetchTags };
 }

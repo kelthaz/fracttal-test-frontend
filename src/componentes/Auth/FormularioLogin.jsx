@@ -19,7 +19,6 @@ export default function FormularioLogin() {
     e.preventDefault();
     try {
       const perfil = await iniciarSesion(email, password);
-      console.log("Usuario logueado:", perfil);
       navigate("/dashboard");
     } catch (err) {
       setError(MENSAJES_ERROR[err.message] || "Ocurrió un error inesperado");

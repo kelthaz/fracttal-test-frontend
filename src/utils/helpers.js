@@ -5,5 +5,6 @@ export const MENSAJES_ERROR = {
     REGISTRO_FALLIDO: "Hubo un problema con el registro, inténtalo de nuevo.",
     CREDECIALES_INVALIDAS: "Credenciales inválidas",
     EMAIL_INVALIDO: "Correo  invalido",
+    RATE_LIMMITED: "Muchas solicitudes. Por favor, inténtalo de nuevo más tarde. o reinicia tu servidor",
   };
   

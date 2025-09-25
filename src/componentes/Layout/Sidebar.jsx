@@ -12,6 +12,8 @@ import {
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import LogoutIcon from "@mui/icons-material/Logout";
 import EventNoteIcon from "@mui/icons-material/EventNote";
+import CategoryIcon from '@mui/icons-material/Category';
+import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import { AuthContext } from "../../contexto/ContextoAuth";
 import { Link as RouterLink, useLocation, useNavigate } from "react-router-dom";
 
@@ -24,6 +26,8 @@ export default function Sidebar({ mobileOpen, handleDrawerToggle }) {
     const menuItems = [
         { text: "Dashboard", icon: <DashboardIcon />, path: "/dashboard" },
         { text: "Tareas", icon: <EventNoteIcon />, path: "/tareas" },
+        { text: "Categorias", icon: <CategoryIcon />, path: "/categorias" },
+        { text: "Etiquetas", icon: <LocalOfferIcon />, path: "/etiquetas" },
     ];
 
     const drawer = (

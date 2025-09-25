@@ -9,6 +9,7 @@ export const login = async (email, password) => {
   } catch (err) {
     if (err.response?.status === 401) throw new Error("CREDECIALES_INVALIDAS");
     if (err.response?.status === 400) throw new Error("EMAIL_INVALIDO");
+    if (err.response?.status === 429) throw new Error("RATE_LIMMITED");
     throw new Error("Hubo un error en el login");
   }
 };

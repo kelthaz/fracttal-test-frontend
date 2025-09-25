@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { listarCategorias } from "../../servicios/categorias/categoriasService";
+import { listarCategorias, agregarCategoriaService } from "../../servicios/categorias/categoriasService";
 
 export default function useCategorias() {
   const [categorias, setCategorias] = useState([]);
@@ -22,5 +22,16 @@ export default function useCategorias() {
     fetchCategorias();
   }, []);
 
-  return { categorias, cargando, error, fetchCategorias };
+
+  const agregarCategoria = async (categoria) => {
+    try {
+      const nuevaCategoria = await agregarCategoriaService(categoria);
+      setCategorias(prev => [...prev, nuevaCategoria]);
+      return nuevaCategoria;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  };
+  return { categorias, cargando, error, fetchCategorias, agregarCategoria };
 }
