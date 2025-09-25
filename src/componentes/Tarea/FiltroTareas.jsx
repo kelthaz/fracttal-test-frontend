@@ -76,12 +76,15 @@ export default function FiltroTareas({
             onChange={(e) => setFilterCategoria(e.target.value)}
           >
             <MenuItem value="">Todos</MenuItem>
-            {!cargandoCategorias &&
-              categorias.map((cat) => (
-                <MenuItem key={cat.id} value={String(cat.id)}>
+            {categorias && categorias.length > 0 ? (
+              categorias.map(cat => (
+                <MenuItem key={cat.id} value={cat.id}>
                   {cat.name}
                 </MenuItem>
-              ))}
+              ))
+            ) : (
+              <MenuItem value="">Sin categorías</MenuItem>
+            )}
           </TextField>
         </Grid>
 
@@ -96,12 +99,16 @@ export default function FiltroTareas({
             onChange={(e) => setFilterTag(e.target.value)}
           >
             <MenuItem value="">Todos</MenuItem>
-            {!cargandoTags &&
-              tags.map((tag) => (
-                <MenuItem key={tag.id} value={String(tag.id)}>
-                  {tag.name}
+            {tags && tags.length > 0 ? (
+              tags.map(tag => (
+                <MenuItem key={tag.id} value={tag.id}>
+                  <Checkbox checked={form.tagsIds.includes(tag.id)} />
+                  <ListItemText primary={tag.name} />
                 </MenuItem>
-              ))}
+              ))
+            ) : (
+              <MenuItem disabled>No hay etiquetas</MenuItem>
+            )}
           </TextField>
         </Grid>
 

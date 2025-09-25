@@ -100,11 +100,16 @@ export default function Tarea({ tarea, onActualizar, categorias, tags }) {
                 onChange={handleChange}
               >
                 <MenuItem value="">Sin categoría</MenuItem>
-                {categorias.map(cat => (
-                  <MenuItem key={cat.id} value={cat.id}>
-                    {cat.name}
-                  </MenuItem>
-                ))}
+                {categorias && categorias.length > 0 ? (
+                  categorias.map(cat => (
+                    <MenuItem key={cat.id} value={cat.id}>
+                      {cat.name}
+                    </MenuItem>
+                  ))
+                ) : (
+                  <MenuItem value="">Sin categorías</MenuItem>
+                )}
+
               </TextField>
             </Grid>
             <Grid isize={{ xs: 12, sm: 2, md: 2 }}>
@@ -146,12 +151,17 @@ export default function Tarea({ tarea, onActualizar, categorias, tags }) {
                       .join(", ")
                   }
                 >
-                  {tags.map(tag => (
-                    <MenuItem key={tag.id} value={tag.id}>
-                      <Checkbox checked={form.tagsIds.includes(tag.id)} />
-                      <ListItemText primary={tag.name} />
-                    </MenuItem>
-                  ))}
+                  {tags && tags.length > 0 ? (
+                    tags.map(tag => (
+                      <MenuItem key={tag.id} value={tag.id}>
+                        <Checkbox checked={form.tagsIds.includes(tag.id)} />
+                        <ListItemText primary={tag.name} />
+                      </MenuItem>
+                    ))
+                  ) : (
+                    <MenuItem disabled>No hay etiquetas</MenuItem>
+                  )}
+
                 </Select>
               </FormControl>
 
