@@ -14,7 +14,6 @@
 ![Vite](https://img.shields.io/badge/Vite-646CFF.svg?style=flat&logo=Vite&logoColor=white)
 ![ESLint](https://img.shields.io/badge/ESLint-4B32C3.svg?style=flat&logo=ESLint&logoColor=white)
 ![Axios](https://img.shields.io/badge/Axios-5A29E4.svg?style=flat&logo=Axios&logoColor=white)
-![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-EC5990.svg?style=flat&logo=React-Hook-Form&logoColor=white)
 ![styledcomponents](https://img.shields.io/badge/styledcomponents-DB7093.svg?style=flat&logo=styled-components&logoColor=white)
 
 ---
@@ -93,7 +92,7 @@ npm run dev
 
 
 ### Componentes
-- **Auth:** Formularios de login y registro, validados con React Hook Form.  
+- **Auth:** Formularios de login y registro, validados.  
 - **Tareas:** Dashboard con listado de tareas, filtros, buscador, paginación y acciones de edición/eliminación.  
 - **UI Global:** Botones, modales, formularios y componentes reutilizables.  
 
@@ -129,7 +128,6 @@ npm run dev
 - Uso de **Material UI** para consistencia visual y responsividad. 
 
 ### Validaciones de Formularios
-- Formularios gestionados con **React Hook Form**.  
 - Feedback inmediato al usuario en inputs y botones.  
 
 ### Buenas Prácticas

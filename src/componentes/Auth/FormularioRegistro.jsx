@@ -30,7 +30,7 @@ export default function FormularioRegistro() {
   };
 
   const handleLogin = () => {
-    navigate("/login"); // ✅ redirige a registrar
+    navigate("/login");
   };
 
   return (
