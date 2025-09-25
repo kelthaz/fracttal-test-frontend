@@ -37,7 +37,7 @@ El proyecto enfatiza la modularidad, con servicios, hooks y componentes dedicado
 Este proyecto ofrece un entorno en **React** optimizado para construir aplicaciones web robustas y centradas en el usuario.  
 
 Características principales:
--  **⚡ Desarrollo Rápido:** Uso de Vite y optimizaciones de React para compilaciones rápidas y recarga en caliente.  
+-  **Desarrollo Rápido:** Uso de Vite y optimizaciones de React para compilaciones rápidas y recarga en caliente.  
 -  **Temas y Layout:** Soporte para temas dinámicos (claro/oscuro) y diseño responsivo.  
 -  **Autenticación Segura:** Rutas protegidas, gestión centralizada de sesión y persistencia de usuario.  
 -  **Arquitectura Modular:** Hooks, servicios y componentes reutilizables para tareas, categorías y etiquetas.  
