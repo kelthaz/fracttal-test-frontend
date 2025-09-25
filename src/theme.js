@@ -1,4 +1,3 @@
-// src/theme.js
 import { createTheme } from "@mui/material/styles";
 
 export const getTheme = (mode = "light") =>
@@ -7,11 +6,11 @@ export const getTheme = (mode = "light") =>
       mode,
       ...(mode === "light"
         ? {
-            primary: { main: "#4789f3" }, // Azul brillante
-            secondary: { main: "#1E3A8A" }, // Azul oscuro (sidebar)
+            primary: { main: "#4789f3" },
+            secondary: { main: "#1E3A8A" },
             background: {
-              default: "#F9FAFB", // Fondo general
-              paper: "#FFFFFF", // Tarjetas y AppBar
+              default: "#F9FAFB",
+              paper: "#FFFFFF",
             },
             text: {
               primary: "#111827",
@@ -35,7 +34,6 @@ export const getTheme = (mode = "light") =>
       fontFamily: "'Inter', 'Roboto', sans-serif",
       h6: { fontWeight: 600 },
       body1: { fontWeight: 400 },
-      // etc.
     },
     
     components: {

@@ -1,4 +1,3 @@
-// src/componentes/Layout/Header.js
 import React from "react";
 import { AppBar, Toolbar, Typography, IconButton, Box, Avatar } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -30,13 +29,13 @@ export default function Header({ handleDrawerToggle }) {
           <MenuIcon />
         </IconButton>
 
-        <Typography variant="h6" noWrap sx={{ flexGrow: 1 }}>
-          Bienvenido 👋
+        <Typography color="secondary" variant="h6" noWrap sx={{ flexGrow: 1 }}>
+          Bienvenido
         </Typography>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
           <Typography variant="body1" color="textSecondary">
-            {usuario?.name || "Invitado"} {/* Si no hay usuario, muestra "Invitado" */}
+            {usuario?.name || "Invitado"}
           </Typography>
           <Avatar
             alt={usuario?.name || "Invitado"}

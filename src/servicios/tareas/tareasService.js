@@ -4,16 +4,14 @@ export const getTareas = async (params = {}) => {
   try {
     const { data } = await api.get("/tareas", { params, headers: { "Cache-Control": "no-cache" } });
 
-    // Aseguramos que siempre sea un array
     if (Array.isArray(data)) return data;
-    if (data && Array.isArray(data.tareas)) return data.tareas; // si tu API lo envía como { tareas: [...] }
-    return []; // fallback
+    if (data && Array.isArray(data.tareas)) return data.tareas;
+    return [];
   } catch (err) {
     console.error("Error obteniendo tareas:", err);
-    return []; // fallback en caso de error
+    return [];
   }
 };
-
 
 export const crearTarea = async (tarea) => {
   const { data } = await api.post("/tareas", tarea);

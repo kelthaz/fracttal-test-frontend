@@ -1,4 +1,4 @@
-import {React, useContext} from "react";
+import { React, useContext } from "react";
 import {
     Box,
     Drawer,
@@ -30,8 +30,15 @@ export default function Sidebar({ mobileOpen, handleDrawerToggle }) {
         <Box sx={{ display: "flex", flexDirection: "column", height: "100%" }}>
             <div>
                 <Toolbar>
-                    <Typography color="black" variant="h6" noWrap>
-                        🔷 App para tareas
+                    <ListItemIcon>
+                        <img
+                            src="/flower_icon.svg"
+                            alt="Logo"
+                            style={{ width: 24, height: 24 }}
+                        />
+                    </ListItemIcon>
+                    <Typography color="primary" variant="h6" noWrap>
+                        App de tareas
                     </Typography>
                 </Toolbar>
                 <List>
@@ -45,7 +52,7 @@ export default function Sidebar({ mobileOpen, handleDrawerToggle }) {
                                     location.pathname === item.path ? "primary.main" : "transparent",
                                 color:
                                     location.pathname === item.path ? "white" : "primary.main",
-                                borderRadius: 6,
+                                borderRadius: 4,
                                 "&:hover": {
                                     bgcolor:
                                         location.pathname === item.path
@@ -69,20 +76,19 @@ export default function Sidebar({ mobileOpen, handleDrawerToggle }) {
                 </List>
             </div>
 
-            {/* Botón Cerrar sesión abajo */}
             <Box sx={{ mt: "auto", mb: 2 }}>
                 <List>
                     <ListItem
-                        onClick={cerrarSesion}// redirige al login
+                        onClick={cerrarSesion}
                         sx={{
-                            borderRadius: 6,
+                            borderRadius: 4,
                             color: "primary.main",
                             "&:hover": {
-                                bgcolor:"grey.100",
+                                bgcolor: "grey.100",
                             },
                         }}
                     >
-                        <ListItemIcon sx={{  color: "primary.main", minWidth: 40 }}>
+                        <ListItemIcon sx={{ color: "primary.main", minWidth: 40 }}>
                             <LogoutIcon />
                         </ListItemIcon>
                         <ListItemText primary="Cerrar sesión" />
@@ -97,7 +103,6 @@ export default function Sidebar({ mobileOpen, handleDrawerToggle }) {
             component="nav"
             sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         >
-            {/* Mobile drawer */}
             <Drawer
                 variant="temporary"
                 open={mobileOpen}
@@ -116,7 +121,6 @@ export default function Sidebar({ mobileOpen, handleDrawerToggle }) {
                 {drawer}
             </Drawer>
 
-            {/* Permanent drawer (desktop) */}
             <Drawer
                 variant="permanent"
                 sx={{

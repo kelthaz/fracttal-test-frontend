@@ -1,18 +1,13 @@
-// src/componentes/Tareas/Tarea.jsx
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import {
   IconButton, Dialog, DialogTitle, DialogContent, DialogActions, TextField, Button, Grid, FormControl, InputLabel, Select, MenuItem,
   OutlinedInput, Checkbox, ListItemText
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import api from "../../servicios/api";
-import useCategorias from "../../hooks/categorias/useCategorias";
-import useTags from "../../hooks/tags/useTags";
 
 export default function Tarea({ tarea, onActualizar, categorias, tags }) {
   const [open, setOpen] = useState(false);
-  // const { categorias } = useCategorias();
-  // const { tags } = useTags();
 
   const formatDateForInput = (dateStr) => {
     if (!dateStr) return "";
@@ -25,7 +20,6 @@ export default function Tarea({ tarea, onActualizar, categorias, tags }) {
 
     return `${yyyy}-${mm}-${dd}`;
   };
-
 
   const [form, setForm] = useState({
     title: tarea.title || "",
@@ -52,7 +46,7 @@ export default function Tarea({ tarea, onActualizar, categorias, tags }) {
 
       await api.put(`/tareas/${tarea.id}`, tareaEditada);
 
-      onActualizar(tareaEditada); // ahora tiene tags y category completos
+      onActualizar(tareaEditada);
       setOpen(false);
     } catch (err) {
       console.error("Error actualizando tarea:", err);
@@ -140,7 +134,6 @@ export default function Tarea({ tarea, onActualizar, categorias, tags }) {
                   value={form.tagsIds}
                   onChange={(e) => {
                     const value = e.target.value;
-                    // Mantener el mismo tipo que los IDs de tags
                     setForm({ ...form, tagsIds: value });
                   }}
                   input={<OutlinedInput label="Etiquetas" />}
@@ -161,11 +154,8 @@ export default function Tarea({ tarea, onActualizar, categorias, tags }) {
                   ) : (
                     <MenuItem disabled>No hay etiquetas</MenuItem>
                   )}
-
                 </Select>
               </FormControl>
-
-
             </Grid>
             <Grid size={{ xs: 12, md: 2 }}>
               <TextField
@@ -177,12 +167,11 @@ export default function Tarea({ tarea, onActualizar, categorias, tags }) {
                 InputLabelProps={{ shrink: true }}
               />
             </Grid>
-
           </Grid>
         </DialogContent>
         <DialogActions>
-          <Button sx={{ borderRadius: 6 }} onClick={() => setOpen(false)} color="secondary">Cancelar</Button>
-          <Button sx={{ borderRadius: 6 }} onClick={handleSubmit} variant="contained" color="primary">Actualizar</Button>
+          <Button sx={{ borderRadius: 4 }} onClick={() => setOpen(false)} color="secondary">Cancelar</Button>
+          <Button sx={{ borderRadius: 4 }} onClick={handleSubmit} variant="contained" color="primary">Actualizar</Button>
         </DialogActions>
       </Dialog>
     </>

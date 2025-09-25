@@ -2,7 +2,7 @@ import React from "react";
 import { Box, CssBaseline } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar";
-import Header from "./Header"; // ✅ Importa el Header
+import Header from "./Header";
 
 const drawerWidth = 240;
 
@@ -16,14 +16,8 @@ export default function Layout() {
     return (
         <Box sx={{ display: "flex" }}>
             <CssBaseline />
-
-            {/* Header */}
             <Header handleDrawerToggle={handleDrawerToggle} />
-
-            {/* Sidebar */}
             <Sidebar mobileOpen={mobileOpen} handleDrawerToggle={handleDrawerToggle} />
-
-            {/* Contenido principal */}
             <Box
                 component="main"
                 sx={{

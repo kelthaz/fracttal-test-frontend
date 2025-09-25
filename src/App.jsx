@@ -12,25 +12,23 @@ function Dashboard() {
 
 export default function App() {
   return (
-      <BrowserRouter>
-        <Routes>
-          {/* Rutas públicas */}
-          <Route path="/login" element={<FormularioLogin />} />
-          <Route path="/registro" element={<FormularioRegistro />} />
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<FormularioLogin />} />
+        <Route path="/registro" element={<FormularioRegistro />} />
 
-          {/* Rutas protegidas */}
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Layout />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="tareas" element={<FormularioTarea />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <Layout />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="tareas" element={<FormularioTarea />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }

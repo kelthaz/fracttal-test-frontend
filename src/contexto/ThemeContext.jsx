@@ -1,4 +1,3 @@
-// src/contexto/ThemeContext.jsx
 import React, { createContext, useMemo, useState, useEffect } from 'react';
 import { ThemeProvider as MUIThemeProvider, CssBaseline } from '@mui/material';
 import { getTheme } from '../theme';

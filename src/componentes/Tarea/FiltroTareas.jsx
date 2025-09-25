@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, TextField, Grid, MenuItem } from "@mui/material";
+import { Box, TextField, Grid, MenuItem, Checkbox, ListItemText } from "@mui/material";
 import useCategorias from "../../hooks/categorias/useCategorias";
 import useTags from "../../hooks/tags/useTags";
 
@@ -10,8 +10,8 @@ export default function FiltroTareas({
   filterFecha, setFilterFecha,
   sortField, setSortField,
   sortOrder, setSortOrder,
-  filterCategoria, setFilterCategoria, // nuevo
-  filterTag, setFilterTag,             // nuevo
+  filterCategoria, setFilterCategoria,
+  filterTag, setFilterTag,
 }) {
   const { categorias, cargando: cargandoCategorias } = useCategorias();
   const { tags, cargando: cargandoTags } = useTags();
@@ -19,7 +19,6 @@ export default function FiltroTareas({
   return (
     <Box sx={{ mb: 4, pt: 2 }}>
       <Grid container spacing={2}>
-        {/* Buscador */}
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <TextField
             fullWidth
@@ -29,8 +28,6 @@ export default function FiltroTareas({
             onChange={(e) => setSearch(e.target.value)}
           />
         </Grid>
-
-        {/* Estado */}
         <Grid size={{ xs: 6, sm: 3, md: 2 }}>
           <TextField
             fullWidth
@@ -46,8 +43,6 @@ export default function FiltroTareas({
             <option value="pendientes">Pendientes</option>
           </TextField>
         </Grid>
-
-        {/* Prioridad */}
         <Grid size={{ xs: 6, sm: 3, md: 1.5 }}>
           <TextField
             fullWidth
@@ -65,7 +60,6 @@ export default function FiltroTareas({
           </TextField>
         </Grid>
 
-        {/* Categoría */}
         <Grid size={{ xs: 6, sm: 3, md: 2 }}>
           <TextField
             fullWidth
@@ -88,13 +82,12 @@ export default function FiltroTareas({
           </TextField>
         </Grid>
 
-        {/* Tag */}
         <Grid size={{ xs: 6, sm: 3, md: 2 }}>
           <TextField
             fullWidth
             size="small"
             select
-            label="Tag"
+            label="Etiqueta"
             value={filterTag || ""}
             onChange={(e) => setFilterTag(e.target.value)}
           >
@@ -102,7 +95,8 @@ export default function FiltroTareas({
             {tags && tags.length > 0 ? (
               tags.map(tag => (
                 <MenuItem key={tag.id} value={tag.id}>
-                  <Checkbox checked={form.tagsIds.includes(tag.id)} />
+                  <Checkbox checked={filterTag?.includes(tag.id)} />
+
                   <ListItemText primary={tag.name} />
                 </MenuItem>
               ))
@@ -112,7 +106,6 @@ export default function FiltroTareas({
           </TextField>
         </Grid>
 
-        {/* Fecha */}
         <Grid size={{ xs: 12, sm: 6, md: 2 }}>
           <TextField
             fullWidth
@@ -125,7 +118,6 @@ export default function FiltroTareas({
           />
         </Grid>
 
-        {/* Ordenar */}
         <Grid size={{ xs: 6, sm: 3, md: 2 }}>
           <TextField
             fullWidth
@@ -143,20 +135,18 @@ export default function FiltroTareas({
           </TextField>
         </Grid>
 
-        {/* Orden */}
         <Grid size={{ xs: 6, sm: 3, md: 2 }}>
-          <TextField
-            fullWidth
-            size="small"
-            select
-            label="Orden"
-            slotProps={{ select: { native: true } }}
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-          >
-            <option value="asc">Ascendente</option>
-            <option value="desc">Descendente</option>
-          </TextField>
+        <TextField
+  fullWidth
+  size="small"
+  select
+  label="Orden"
+  value={sortOrder}
+  onChange={(e) => setSortOrder(e.target.value)}
+>
+  <MenuItem value="asc">Ascendente</MenuItem>
+  <MenuItem value="desc">Descendente</MenuItem>
+</TextField>
         </Grid>
       </Grid>
     </Box>

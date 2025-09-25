@@ -1,4 +1,3 @@
-// src/utils/helpers.js
 export const MENSAJES_ERROR = {
     NOMBRE_OBLIGATORIO: "El nombre es obligatorio",
     EMAIL_INVALIDO: "El correo electrónico no es válido",

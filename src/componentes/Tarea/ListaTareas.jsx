@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Table, TableBody, TableCell, TableContainer,
   TableHead, TableRow, Paper, Checkbox, Typography,
-  IconButton, Box, TablePagination, Snackbar, Alert
+  IconButton, Box, TablePagination, Snackbar, Alert, Button
 } from "@mui/material";
 import { getTareas, toggleCompletada as toggleCompletadaAPI, eliminarTarea as eliminarTareaAPI } from "../../servicios/tareas/tareasService";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -10,6 +10,7 @@ import FiltroTareas from "./FiltroTareas";
 import ItemTarea from "./ItemTarea";
 import useCategorias from "../../hooks/categorias/useCategorias";
 import useTags from "../../hooks/tags/useTags";
+import Papa from "papaparse";
 
 
 export default function ListaTareas({ refresh = 0 }) {
@@ -20,13 +21,11 @@ export default function ListaTareas({ refresh = 0 }) {
   const [alerta, setAlerta] = useState({ abierto: false, mensaje: "", severidad: "success" });
   const [snackbarMensaje, setSnackbarMensaje] = useState("Eliminada");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-
-
   const [search, setSearch] = useState("");
   const [filterEstado, setFilterEstado] = useState("todos");
   const [filterPrioridad, setFilterPrioridad] = useState("todas");
   const [filterFecha, setFilterFecha] = useState("");
-  const [sortField, setSortField] = useState("");
+  const [sortField, setSortField] = useState("created_in");
   const [sortOrder, setSortOrder] = useState("asc");
   const [filterTag, setFilterTag] = useState("");
   const [filterCategoria, setFilterCategoria] = useState("");
@@ -70,10 +69,17 @@ export default function ListaTareas({ refresh = 0 }) {
     if (filterPrioridad !== "todas") {
       filtradas = filtradas.filter(t => t.priority === filterPrioridad);
     }
-
     if (filterFecha) {
-      filtradas = filtradas.filter(t => String(t.expiration_date || "").startsWith(filterFecha));
+      filtradas = filtradas.filter(t => {
+        const fecha = t.expiration_date ? new Date(t.expiration_date) : null;
+        if (!fecha) return false;
+        const yyyy = fecha.getFullYear();
+        const mm = String(fecha.getMonth() + 1).padStart(2, "0");
+        const dd = String(fecha.getDate()).padStart(2, "0");
+        return `${yyyy}-${mm}-${dd}` === filterFecha;
+      });
     }
+
 
     if (sortField) {
       filtradas.sort((a, b) => {
@@ -113,6 +119,11 @@ export default function ListaTareas({ refresh = 0 }) {
   };
 
   const tareasProcesadas = procesarTareas();
+  const tareasProcesadasParaCSV = tareasProcesadas.map(t => ({
+    ...t,
+    category: t.category?.name || "",
+    tags: t.tags?.map(tag => tag.name).join(", ") || ""
+  }));
   const tareasMostradas = tareasProcesadas.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const eliminarTarea = async (id) => {
@@ -127,16 +138,29 @@ export default function ListaTareas({ refresh = 0 }) {
     }
   };
 
-  const actualizarTarea = async (tareaEditada) => {
-    try {
-      await api.put(`/tareas/${tareaEditada.id}`, tareaEditada);
-      // Actualizamos la lista localmente para reflejar los cambios instantáneamente
-      setTareas(prev => prev.map(t => t.id === tareaEditada.id ? tareaEditada : t));
-      setAlerta({ abierto: true, mensaje: "Tarea actualizada correctamente", severidad: "success" });
-    } catch (error) {
-      console.error("Error actualizando tarea:", error);
-      setAlerta({ abierto: true, mensaje: "Error al actualizar la tarea", severidad: "error" });
-    }
+  const exportarCSV = () => {
+    const csv = Papa.unparse(tareasProcesadasParaCSV);
+    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.setAttribute("download", "tareas.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const exportToJSON = () => {
+    const dataStr = JSON.stringify(tareasProcesadas, null, 2);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = "tareas.json";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   if (cargando) return <Typography>Cargando tareas...</Typography>;
@@ -157,7 +181,7 @@ export default function ListaTareas({ refresh = 0 }) {
 
       <Snackbar
         open={alerta.abierto}
-        autoHideDuration={5000} // se cierra automáticamente después de 3s
+        autoHideDuration={5000}
         onClose={() => setAlerta({ ...alerta, abierto: false })}
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
       >
@@ -180,6 +204,7 @@ export default function ListaTareas({ refresh = 0 }) {
           {snackbarMensaje}
         </Alert>
       </Snackbar>
+
       <TableContainer component={Paper} sx={{ mt: 3 }}>
         <Table>
           <TableHead>
@@ -232,6 +257,10 @@ export default function ListaTareas({ refresh = 0 }) {
             ))}
           </TableBody>
         </Table>
+        <Button sx={{ mt: 2, ml: 2 }} variant="outlined" onClick={exportarCSV}>
+          Exportar CSV
+        </Button>
+        <Button sx={{ mt: 2, ml: 2 }} variant="outlined" onClick={exportToJSON}>Exportar JSON</Button>
         <TablePagination
           component="div"
           count={tareasProcesadas.length}
