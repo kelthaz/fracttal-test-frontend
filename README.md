@@ -19,7 +19,7 @@
 
 ---
 
-## 📑 Tabla de Contenidos
+##  Tabla de Contenidos
 - [Visión General](#visión-general)
 - [Primeros Pasos](#primeros-pasos)
   - [Requisitos Previos](#requisitos-previos)
@@ -29,12 +29,11 @@
 
 ---
 
-## 🔎 Visión General
+## Visión General
 **fracttal-test-frontend** es un scaffold moderno basado en **React** diseñado para un desarrollo rápido y con una arquitectura escalable. Utiliza **Vite** para compilaciones ultrarrápidas e integra optimizaciones específicas de React para mejorar el flujo de trabajo.  
 
 El proyecto enfatiza la modularidad, con servicios, hooks y componentes dedicados para autenticación, gestión de tareas, categorías y etiquetas, asegurando mantenibilidad y reutilización.  
 
-### ¿Por qué fracttal-test-frontend?
 Este proyecto ofrece un entorno en **React** optimizado para construir aplicaciones web robustas y centradas en el usuario.  
 
 Características principales:
@@ -58,7 +57,7 @@ Este proyecto requiere las siguientes dependencias:
 - **Este proyecto fue probado con **Node.js v22.19.0**.  
 Se recomienda usar la misma versión para evitar problemas de compatibilidad.
 
-### ⚙️ Instalación
+###  Instalación
 Clona el proyecto desde el repositorio e instala las dependencias:
 
 1. **Clonar el repositorio:**
@@ -83,14 +82,14 @@ npm run dev
 
 
 ###  Estructura de Carpetas
-├── componentes/ # Componentes reutilizables de UI
-├── contexto/ # Contextos globales (Auth, Tema, etc.)
-├── hooks/ # Hooks personalizados para lógica de negocio
-├── paginas/ # Páginas principales (Login, Registro, Dashboard, etc.)
-├── rutas/ # Definición de rutas protegidas y públicas
-├── servicios/ # Comunicación con la API usando Axios
-├── estilos/ # Estilos globales y configuración de temas
-└── main.jsx # Punto de entrada de la aplicación
+- **componentes/** # Componentes reutilizables de UI
+- **contexto/** # Contextos globales (Auth, Tema, etc.)
+- **hooks/** # Hooks personalizados para lógica de negocio
+- **paginas/** # Páginas principales (Login, Registro, Dashboard, etc.)
+- **rutas/** # Definición de rutas protegidas y públicas
+- **servicios/** # Comunicación con la API usando Axios
+- **estilos/** # Estilos globales y configuración de temas
+- **main.jsx** # Punto de entrada de la aplicación
 
 
 ### Componentes
